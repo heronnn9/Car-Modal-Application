@@ -4,8 +4,15 @@ import CustomFilter from "@/components/CustomFilter";
 import SearchBar from "@/components/SearchBar";
 import { fetchCars } from "@/utils";
 import CarCard from "@/components/CarCard";
-export default async function Home() {
-  const allCars = await fetchCars();
+import { fuels, yearsOfProduction } from "@/constants";
+export default async function Home({ searchParams }) {
+  const allCars = await fetchCars({
+    brand: searchParams.brand || "",
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 10,
+    model: searchParams.model || "",
+  });
 
   const isEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
   return (
@@ -13,16 +20,11 @@ export default async function Home() {
       <Hero />
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         <div className="home__text-container">
-          <h1 className="text-4xl font-extrabold">Car Porn Catalouge</h1>
+          <h1 className="text-4xl font-extrabold">Car Hub Catalouge</h1>
           <p>Explore the cars you might like</p>
         </div>
         <div className="home__filters">
           <SearchBar />
-
-          <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
-          </div>
         </div>
 
         {!isEmpty ? (

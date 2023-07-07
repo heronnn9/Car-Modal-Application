@@ -2,8 +2,8 @@ import { Navbar, Footer } from "@/components";
 import "./globals.css";
 
 export const metadata = {
-  title: "Car Porn",
-  description: "Discover Best Car Porns",
+  title: "Car Hub",
+  description: "Discover Best Cars",
 };
 
 export default function RootLayout({
